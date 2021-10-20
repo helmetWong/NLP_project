@@ -5,6 +5,20 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+https = 'https://t.co/'
+def remove_http (text):
+    id =  text.find(https,0)
+    if id > -1:
+        return text[:id] + text[id+23:]
+    else: 
+        return text
+
+def df_remove_http(dataframe, inputName, newColName):
+    newCol = dataframe[inputName].apply (lambda x:remove_http(x))
+    dataframe.insert(loc = 1, column = newColName, value = newCol)
+    del dataframe[inputName]
+    return dataframe
+
 def remove_punctuation (text):
     '''
     remove_punctuation ( ) -> remove all punctuation that listed in the library of string.punctuation
@@ -83,21 +97,25 @@ if __name__ == "__main__":
     row = 2000
     df = df[0:row]
 
-    df = df_lowerCase (df, 'text', 'lower_text')                ## step 2: lower case on text
-    print (df)
+    #print (df[96:99])
+    df = df_remove_http(df,'text', 'no_http')                    ## step 2: remove all 'https://t.co/' + 10 characters
 
-    df = df_remove_punctuation (df, 'lower_text', 'no_pun_text') ## step 3: remove the punctuation 
-    print (df)   
+    #print (df[96:99])
+    df = df_lowerCase (df, 'no_http', 'lower_text')              ## step 3: lower case on text
+    #print (df)
+
+    df = df_remove_punctuation (df, 'lower_text', 'no_pun_text') ## step 4: remove the punctuation 
+    #print (df)   
     
-    df= df_tokenization(df, 'no_pun_text', 'tok_words')          ## step 4: tokenization
-    print (df)
+    df= df_tokenization(df, 'no_pun_text', 'tok_words')          ## step 5: tokenization
+    #print (df)
 
     stop_words = set (stopwords.words("english"))
-    df = df_remove_stopwords (df, 'tok_words', 'no_stopwords')   ## step 5: remove stopwords
-    print (df)
+    df = df_remove_stopwords (df, 'tok_words', 'no_stopwords')   ## step 6: remove stopwords
+    #print (df)
 
     wordnet_lemmatizer = WordNetLemmatizer()
-    df = df_lemmatizer (df, 'no_stopwords', 'lem_words')         ## step 6: lemmate 
+    df = df_lemmatizer (df, 'no_stopwords', 'lem_words')         ## step 7: lemmate 
     print (df)
 
 
