@@ -1,9 +1,13 @@
 import pandas as pd
+import numpy as np
 import os
 import string
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from wordcloud import WordCloud, STOPWORDS
+from sklearn.feature_extraction.text import CountVectorizer  
+import matplotlib.pyplot as plt
 
 https = 'https://t.co/'
 def remove_http (text):
@@ -67,7 +71,7 @@ def remove_stopwords(text):
     return output
 
 def df_remove_stopwords(dataframe, inputName, newColName):
-
+    stop_words = set (stopwords.words("english"))
     newCol = dataframe[inputName].apply(lambda x:remove_stopwords(x))
     dataframe.insert(loc = 1, column = newColName, value = newCol)
     del dataframe[inputName]
@@ -116,7 +120,39 @@ if __name__ == "__main__":
 
     wordnet_lemmatizer = WordNetLemmatizer()
     df = df_lemmatizer (df, 'no_stopwords', 'lem_words')         ## step 7: lemmate 
-    print (df)
+    #print (df)
+    ## Join words to a single line as required by CountVectorizer
+    
+    
+    
+    df['lem_words'] = df['lem_words'].apply(lambda x: ' '.join([word for word in x]))
+    comment_words = ""
+    for index, row in df.iterrows(): 
+        comment_words += " ".join(row)+" "
+    #print (comment_words)
+
+
+    # Creating the Word Cloud
+    final_wordcloud = WordCloud(width = 800, height = 800, 
+                    background_color ='black', 
+                    stopwords = stop_words, 
+                    min_font_size = 10).generate(comment_words)
+
+    # Displaying the WordCloud                    
+    plt.figure(figsize = (10, 10), facecolor = None) 
+    plt.imshow(final_wordcloud) 
+    plt.axis("off") 
+    plt.tight_layout(pad = 0) 
+  
+    plt.show()
+    
+    
+    #vectorizer = CountVectorizer(lowercase=False)
+    #x = vectorizer.fit_transform(df['lem_words'].values)
+
+    #print(vectorizer.get_feature_names())
+    #print(x.toarray())
+
 
 
 
