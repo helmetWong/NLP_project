@@ -10,26 +10,35 @@ def processFunction (rows, nrows):
     filename = "Olympics_Tokyo_tweets.csv"
     stop_words = stopwords.words("english")
 
-    tailor_stopwords = []
-    #tailor_stopwords = ['olympic', 'sport', 'olympics', 'tokyo olympic','olymics olympic','tokyo2020 olympic',
-    #                    'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
-    #                    'ateezofficial', 'ateez', 'official', 'lovesateez',
-    #                    'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love', 'wa', 'one'
-    #                    'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] 
+    #tailor_stopwords = []
+    tailor_stopwords = ['olympic', 'sport', 'olympics', 'tokyo olympic','olymics olympic','tokyo2020 olympic',
+                        'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
+                        'ateezofficial', 'ateez', 'official', 'lovesateez',
+                        'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love', 'wa', 'one', 'tching', 'tch'
+                        'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] 
 
     replaced_to = ""
 
     df = pd.read_csv(os.path.join(path, filename), header = 0, 
                               skiprows =range (1, rows), 
-                              nrows = nrows, usecols=[1])
+                              nrows = nrows, 
+                              usecols=['text', 'date'])
+
+    ###################### MASK THE DATE ################
+
+    #df['date'] = pd.to_datetime(df['date'], errors = 'coerce').dt.normalize()
+    #start_date = '2021-07-22' 
+    #end_date = '2021-08-09'
+    #mask = (df['date'] > start_date) & (df['date'] <= end_date)
+    #df = df.loc[mask]
+    
     df = df_remove_http (df, 'text', 'no_http')                     ## step 2: remove all 'https://t.co/' + 10 
     df = df_lowerCase (df, 'no_http', 'lower_text')                 ## step 3: lower case on text
-    df = df_remove_punctuation (df, 'lower_text', 'no_pun_text')    ## step 4: remove the punctuation 
 
- 
-    df['no_pun_text'] = df['no_pun_text'].replace(dict (zip (tailor_stopwords, 
+    df['lower_text'] = df['lower_text'].replace(dict (zip (tailor_stopwords, 
                                                              [replaced_to] *len(tailor_stopwords))),
                                                  regex = True)                         
+    df = df_remove_punctuation (df, 'lower_text', 'no_pun_text')    ## step 4: remove the punctuation 
 
     df= df_tokenization(df, 'no_pun_text', 'tok_words')          ## step 5: tokenization
     #df = df_remove_stopwords (df, 'tok_words', 'no_stopwords')   ## step 6: remove 
@@ -53,6 +62,8 @@ def main():
     for n in range (6):
         rows.append((skip * n)+ 1 )
         nrows.append(skip)
+    print (rows)
+    print (nrows)
 
 
     with concurrent.futures.ProcessPoolExecutor() as executor:
