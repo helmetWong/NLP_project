@@ -103,6 +103,7 @@ def df_remove_stopwords(dataframe, inputName, newColName):
     return dataframe
 
 def lemmatizer(text):
+    wordnet_lemmatizer = WordNetLemmatizer()
     lemm_text = [wordnet_lemmatizer.lemmatize(word) for word in text]
     return lemm_text
 

@@ -10,12 +10,12 @@ def processFunction (rows, nrows):
     filename = "Olympics_Tokyo_tweets.csv"
     stop_words = stopwords.words("english")
 
-
-    tailor_stopwords = ['olympic', 'sport', 'olympics', 'tokyo olympic','olymics olympic','tokyo2020 olympic',
-                        'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
-                        'ateezofficial', 'ateez', 'official', 'lovesateez',
-                        'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love',
-                        'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] #+ stop_words
+    tailor_stopwords = []
+    #tailor_stopwords = ['olympic', 'sport', 'olympics', 'tokyo olympic','olymics olympic','tokyo2020 olympic',
+    #                    'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
+    #                    'ateezofficial', 'ateez', 'official', 'lovesateez',
+    #                    'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love', 'wa', 'one'
+    #                    'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] 
 
     replaced_to = ""
 
@@ -31,11 +31,11 @@ def processFunction (rows, nrows):
                                                              [replaced_to] *len(tailor_stopwords))),
                                                  regex = True)                         
 
-    #df= df_tokenization(df, 'no_pun_text', 'tok_words')          ## step 5: tokenization
+    df= df_tokenization(df, 'no_pun_text', 'tok_words')          ## step 5: tokenization
     #df = df_remove_stopwords (df, 'tok_words', 'no_stopwords')   ## step 6: remove 
-    #df = df_lemmatizer (df, 'tok_words', 'lem_words') 
-    #df['tok_words'] = df['tok_words'].apply(lambda x: ' '.join([word for word in x]))
-    text = " ".join(review for review in df.no_pun_text)
+    df = df_lemmatizer (df, 'tok_words', 'lem_words') 
+    df['lem_words'] = df['lem_words'].apply(lambda x: ' '.join([word for word in x]))
+    text = " ".join(review for review in df.lem_words)
     return text
 
 def main():
@@ -43,15 +43,14 @@ def main():
     t1 = time.perf_counter()
     print ("start....")
 
-    skip = 50000
+    skip = 54000
     #rows = [1, (skip * 1) + 1, (skip * 2) + 1, (skip * 3) + 1, (skip * 4) + 1, (skip * 5) + 1, (skip * 6) + 1 ]
     #nrows = [50000, 50000, 50000, 50000, 50000, 50000, 50000]
-    wordnet_lemmatizer = WordNetLemmatizer()
     rows = list()
     nrows = list()
     wholeText = ""
     totalWords = 0
-    for n in range (7):
+    for n in range (6):
         rows.append((skip * n)+ 1 )
         nrows.append(skip)
 
