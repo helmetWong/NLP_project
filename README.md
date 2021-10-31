@@ -27,6 +27,8 @@ Step 5: remove all the punctuation
 
 Step 6: tokenization
 
-Step 7: lemmatization      
+Step 7: remove English stopwords
 
-Step 8: join all the words together seperated by " " within a row
+Step 8: lemmatization      
+
+Step 9: join all the words together seperated by " " within a row
