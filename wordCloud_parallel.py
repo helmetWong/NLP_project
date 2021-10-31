@@ -104,7 +104,7 @@ def processFunction (rows, nrows):
     df['lem_words'] = df['lem_words'].\
         apply(lambda x: ' '.join([word for word in x]))             ## step 10: join words in every rows
     
-    text = " ".join(review for review in df.lem_words)              ## step 10: join all words in a single text
+    text = " ".join(review for review in df.lem_words)              ## step 11: join all words in a single text
     return text
 
 def main():

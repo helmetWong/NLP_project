@@ -1,0 +1,119 @@
+
+remove_http (text):
+        This function remove 'https://t.co' + 10 following characters in
+        a string
+    parameter:
+        text (string)
+    return:
+        text (string)
+
+*********************************************************************************************************
+
+df_remove_http (dataframe, inputName, newColName):
+    parameter:
+        dataframe(dataframe)
+        inputName (string)
+        newColName (string)
+    return:
+        dataframe (dataframe)
+
+*********************************************************************************************************
+
+remove_punctuation ( ) -> remove all punctuation that listed in the library of string.punctuation
+    parameters:
+        text (string)
+    return: 
+        list of string without any punctuation
+
+*********************************************************************************************************
+
+remove_punctuation ( , , )-> remove all punctuations in a column of dataframe 
+    parameters:
+        dataframe (dataframe)
+        inputName (string)
+        newColName (string)
+    return: 
+        single column dataframe
+
+*********************************************************************************************************
+
+lowerCase ( , , )-> change all the capital letter to lower case  
+    parameters:
+        dataframe (dataframe)
+        inputName (string)
+        newColName (string)
+    return: 
+        single column dataframe
+
+*********************************************************************************************************
+
+tokenization ( ) -> change a line of string into token in a list
+    parameters:
+        text (string)
+    return: 
+        list of string
+
+*********************************************************************************************************
+
+df_tokenization ( , , )-> tokenize each row of string into a list for each row  
+    parameters:
+        dataframe (dataframe)
+        inputName (string)
+        newColName (string)
+    return: 
+        single column dataframe
+
+*********************************************************************************************************
+
+remove_stopwords ( ) -> input a list of string and remove all English stopwords
+    parameters:
+        text (list)
+    return: 
+        output (list)
+
+*********************************************************************************************************
+
+df_remove_stopwords ( , , )-> remove stopwords in rows in dataframe  
+    parameters:
+        dataframe (dataframe)
+        inputName (string)
+        newColName (string)
+    return: 
+        single column dataframe
+
+*********************************************************************************************************
+
+remove_another_stopwords ( ) -> input tokenList of words 
+        and remove second set of stopwords, "ANOTHER_STOPWORDS"
+    parameters:
+        text (list)     -> tokenized list
+    return: 
+        output (list)   -> tokenized list
+
+*********************************************************************************************************
+
+lemmatizer ( ) -> lemmatize the words in the list
+    parameters:
+        text (list)
+    return: 
+        output (list)
+
+*********************************************************************************************************
+
+df_lemmatizer ( , , )-> lemmatize the words in a row in dataframe 
+    parameters:
+        dataframe (dataframe)
+        inputName (string)
+        newColName (string)
+    return: 
+        single column dataframe
+
+*********************************************************************************************************
+
+remove_emoji ( ) -> remove the emoji in the string
+    parameters:
+        string (string)
+    return: 
+        output (string)
+
+*********************************************************************************************************

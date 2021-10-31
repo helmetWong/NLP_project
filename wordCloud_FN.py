@@ -154,6 +154,14 @@ def remove_stopwords(text):
     return output
 
 def remove_another_stopwords(text):
+    '''
+    remove_another_stopwords ( ) -> input tokenList of words 
+        and remove second set of stopwords, "ANOTHER_STOPWORDS"
+    parameters:
+        text (list)     -> tokenized list
+    return: 
+        output (list)   -> tokenized list
+    '''
     output = [i for i in text if i not in ANOTHER_STOPWORDS]
     return output
 
