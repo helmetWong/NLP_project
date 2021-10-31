@@ -99,12 +99,12 @@ def processFunction (rows, nrows):
     # stop_words = stopwords.words("english")
     #df = df_remove_stopwords (df, 'tok_words', 'no_stopwords')     ## step x: remove English stop words // not used 
     
-    df = df_lemmatizer (df, 'tok_words', 'lem_words') 
+    df = df_lemmatizer (df, 'tok_words', 'lem_words')               ## step 7: lemmatization
     
     df['lem_words'] = df['lem_words'].\
-        apply(lambda x: ' '.join([word for word in x]))             ## step 7: lemmatization
+        apply(lambda x: ' '.join([word for word in x]))             ## step 8: join the words
     
-    text = " ".join(review for review in df.lem_words)              ## step 8: join the words
+    text = " ".join(review for review in df.lem_words)              
     return text
 
 def main():
