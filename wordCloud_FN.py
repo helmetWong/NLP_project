@@ -15,6 +15,29 @@ https = 'https://t.co/'
 wordnet_lemmatizer = WordNetLemmatizer()
 STOPWORDS = set(stopwords.words('english'))
 
+olympic = ['olympi','2020','tokyo2020','tokyo','olympic','watching olympic', 'tokyo olympic','olympic olympic game',\
+            'watching olympic', 'olympics', 'olympics got', 'olympic', 'olympics olympic', 'olympics woman',\
+            'day olympic', 'sport olympic', 'win olympic', 'tokyoolympic', 'go olympics','olympic', 'tokyoolympic','tokyoolympic',\
+            'athlete', 'olympicgame', 'tokyoolympic ', 's2021']
+gold    = ['gold medal', 'gold', 'medal olympic', 'olympics gold', 'olympics medal', 'gold olympic', 'medal']
+common  = ['gon na', 'gon  na','gon', 'na','got','watching olympic', 'game', 'guy', 'people', 'time', 'mean', 'get', 'play', 'sport',\
+            'got answer', 'best', 'make', 'watch olympic', 'olympics live', 'story', 'could', 'see', 'made', 'one', 'like', 'think',\
+            'watching', 'going', 'love','say','good', 'would', 'also', 'still', 'watch', 'much', 'win', 'go', 'athlete', 'look',\
+            'today', 'many', 'first', 'dont','didnt', 'cant', 'man', 'woman','oh','know', 'year', 'day', 'even', 'let', 'give', 'everything',\
+            'anyone', 'must', 'may', 'watch','alway', 'winning', 'went','event', 'new', 'need', 'want','said','watched','take',\
+            'world', 'someone','everyone', 'done', 'next', 'last','getting']
+ateez   = ['ateez', 'ateezofficial', 'ateezofficial ateez', 'olympicslovesateez ateez', 'olympicslovesateez ateezofficial',\
+            'answer olympicslovesateez', 'olympicslovesateez dreamer', 'olympicslovesateez', 'win olympicslovesateez',\
+            'olympicslovesateez', 'slovesateez dreamer']
+expression =['congratulation', 'well done','proud','happy', 'incredible','thank', 'amazing','great','right','well', 'congrat'\
+             'lol']
+alphabet = ['n', 'c', 'b', 'f', 'im','u','h']
+
+interest = ['new', 'even','country','japan','really', 'team', 'hope', 'thing', 'every', 'lot']
+unknown  = ['amp', 'omg']
+
+ANOTHER_STOPWORDS = olympic + gold + common + ateez + expression + alphabet + interest + unknown
+
 def remove_http (text):
     '''
     remove_http (text):
@@ -128,6 +151,10 @@ def remove_stopwords(text):
         output (list) 
     '''
     output= [i for i in text if i not in STOPWORDS]
+    return output
+
+def remove_another_stopwords(text):
+    output = [i for i in text if i not in ANOTHER_STOPWORDS]
     return output
 
 def df_remove_stopwords(dataframe, inputName, newColName):

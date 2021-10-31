@@ -34,16 +34,10 @@ def processFunction (rows, nrows):
     #  remove these words to retrieve better information from wordcloud
     #
     ##################################################################################
-    #tailor_stopwords = []
-    tailor_stopwords = ['olympic', 'sport', 'olympics', 'tokyo olympic',
-                        'olymics olympic','tokyo2020 olympic',
-                        'olympics tokyo2020', 'olympics olympic', 'tokyo', 
-                        'olympicgame',
-                        'ateezofficial', 'ateez', 'official', 'lovesateez',
-                        'get','got', 'got answer', 'today', 'love', 'like', 
-                        'hope', 'also', 'win love', 'wa', 'one', 'tching', 'tch'
-                        'gon', 'gon na', 'na', 'win', 'answer', 
-                        'watching','watch','game', 'would'] 
+    tailor_stopwords = []
+    tailor_stopwords = ['olympic', 'tokyoolympic', 'olympicgame','answer','tokyo2020',\
+                        'answer slovesateez','slovesateez','slovesateez', 'solvesateez',\
+                        'slovesateez dreamer']
 
     replaced_to = ""
 
@@ -75,7 +69,7 @@ def processFunction (rows, nrows):
 
     df['date'] = pd.to_datetime(df['date'], errors = 'coerce').dt.normalize()
     start_date = '2021-07-22' 
-    end_date = '2021-08-09'
+    end_date = '2021-08-10'
     mask = (df['date'] > start_date) & (df['date'] <= end_date)
     df = df.loc[mask]
 
@@ -94,7 +88,7 @@ def processFunction (rows, nrows):
     df['lower_text'] = df['lower_text'].\
         replace(dict (zip (tailor_stopwords,\
         [replaced_to] *len(tailor_stopwords))),\
-        regex = True)                                               ## step 4: remove all tailor stopwords
+        regex = True)                                               ## step 4: remove first set tailor stopwords
     
     df = df_remove_punctuation (df, 'lower_text', 'no_pun_text')    ## step 5: remove the punctuation 
 
@@ -103,11 +97,14 @@ def processFunction (rows, nrows):
     df= df_remove_stopwords(df, 'tok_words','no_stopwords' )        ## step 7: remove English stopwords   
     
     df = df_lemmatizer (df, 'no_stopwords', 'lem_words')            ## step 8: lemmatization
-    
+
     df['lem_words'] = df['lem_words'].\
-        apply(lambda x: ' '.join([word for word in x]))             ## step 9: join the words
+        apply(remove_another_stopwords)                             ## step 9: remove second set of tailor stopwords
+
+    df['lem_words'] = df['lem_words'].\
+        apply(lambda x: ' '.join([word for word in x]))             ## step 10: join words in every rows
     
-    text = " ".join(review for review in df.lem_words)              
+    text = " ".join(review for review in df.lem_words)              ## step 10: join all words in a single text
     return text
 
 def main():
