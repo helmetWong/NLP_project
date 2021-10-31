@@ -1,16 +1,22 @@
 # NLP_project
 
-dataPrepareFn.py inclues certain functions to do data preparation in text mining.
+worldCloudFn.py includes certain functions to do data preparation in text mining.
+printDoc.py     uses to print the docstring of worldCloud.py and save in help.txt
+wordCloud_parallel.py will use worldCloudFn.py to do data preperation (currently 8 steps, see below).
+                      This will create a word cloud for data sciences to select words for futher analysis. 
 
+
+dataset:
 https://www.kaggle.com/amritpal333/tokyo-olympics-2021-tweets
 Olympics_Tokyo_tweets.csv(98.54 MB)
 
-functions for data preparation:
+Functions for data preparation:
 
-1. retrive the column 'text' only
-2. remove all 'https://t.co/' + 10 characters
-3. lower case on text
-4. remove the punctuation 
-5. tokenization
-6. remove stopwords
-7. lemmate 
+Step 1: Remove all 'remove all 'https://t.co/' + 10 
+Step 2: Remove all emoji
+Step 3: lower case on text
+Step 4: remove all tailor stopwords (defined above)
+Step 5: remove all the punctuation
+Step 6: tokenization
+Step 7: lemmatization       
+Step 8: join all the words together seperated by " " within a row
