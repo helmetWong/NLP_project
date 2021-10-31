@@ -2,7 +2,7 @@
 
 worldCloudFn.py includes certain functions to do data preparation in text mining.
 
-printDoc.py     uses to print the docstring of worldCloud.py and save in help.txt
+printDoc.py     uses to print the docString of worldCloud.py and save in help.txt
 
 wordCloud_parallel.py will use worldCloudFn.py to do data preperation (currently 8 steps, see below).
                       This will create a word cloud for data sciences to select words for futher analysis. 
