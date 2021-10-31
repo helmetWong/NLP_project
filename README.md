@@ -21,7 +21,7 @@ Step 2: Remove all emoji
 
 Step 3: lower case on text
 
-Step 4: remove all tailor stopwords (defined above)
+Step 4: remove first set of tailor stopwords 
 
 Step 5: remove all the punctuation
 
@@ -31,4 +31,8 @@ Step 7: remove English stopwords
 
 Step 8: lemmatization      
 
-Step 9: join all the words together seperated by " " within a row
+Step 9: remove second set of tailor stopwords
+
+Step 10: join all the words together seperated by " " within a row
+
+Step 11: join all words in a single text
