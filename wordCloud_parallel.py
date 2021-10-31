@@ -13,19 +13,20 @@ def processFunction (rows, nrows):
         nrows (int)     -> number of rows to load in a dataframe
       return 
         text (string)   -> to input in a wordcloud function. 
-
       The data preparation is applied in following steps: 
        Step 1: Remove all 'remove all 'https://t.co/' + 10 
        Step 2: Remove all emoji
        Step 3: lower case on text
-       Step 4: remove all tailor stopwords (defined above)
-       Step 5: remove all the punctuation
+       Step 4: remove first set of tailor 
+       Step 5: remove the punctuation
        Step 6: tokenization
-       Step 7: lemmatization       
-       Step 8: join all the words together seperated by " " within a row
+       Step 8: remove English stopwrods
+       Step 7: lemmatization  
+       Step 8: remove second set of tailor stopwords 
+       Step 9: join all the words together seperated by " " within a row
+       Step 10: join all rows into a string 
        (These functions are written in wordCloud_FN.py
         please read the docstring "printDoc.py" for details).
-       return: is a string of words to be used in wordcloud. 
     '''
 
     ####    Tailor stopwords    ######################################################
@@ -179,7 +180,10 @@ def main():
     plt.imshow(final_wordcloud) 
     plt.axis("off") 
     plt.tight_layout(pad = 0) 
-  
+
+    with open ('results.txt', 'w', encoding='utf-8') as f:
+        f.write(wholeText)
+    
     t2 = time.perf_counter()
     print(f'Finished in {t2-t1} seconds')
     plt.show()

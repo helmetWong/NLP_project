@@ -2,6 +2,9 @@ from wordCloud_FN import *
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import concurrent.futures
+from collections import Counter
+import matplotlib.pyplot as plt
+#import pandas as pd
 
 def processFunction (rows, nrows):
     '''     
@@ -33,14 +36,14 @@ def processFunction (rows, nrows):
     #  remove these words to retrieve better information from wordcloud
     #
     ##################################################################################
-    #tailor_stopwords = []
-    tailor_stopwords = ['im', 'u', 's', 'g', 'w','b','c','oh'
-        'olympic', 'sport', 'olympics', 'tokyo olympic',
-        'olymics olympic','tokyo2020 olympic',
-                        'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
-                        'ateezofficial', 'ateez', 'official', 'lovesateez',
-                        'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love', 'wa', 'one', 'tching', 'tch'
-                        'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] 
+    tailor_stopwords = []
+    #tailor_stopwords = ['im', 'u', 's', 'g', 'w','b','c','oh'
+    #    'olympic', 'sport', 'olympics', 'tokyo olympic','olympi'
+    #    'olymics olympic','tokyo2020 olympic',
+    #                    'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
+    #                    'ateezofficial', 'ateez', 'official', 'lovesateez',
+    #                    'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love', 'wa', 'one', 'tching', 'tch'
+    #                    'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] 
 
     replaced_to = ""
 
@@ -91,7 +94,7 @@ def processFunction (rows, nrows):
     df['lower_text'] = df['lower_text'].\
         replace(dict (zip (tailor_stopwords,\
         [replaced_to] *len(tailor_stopwords))),\
-        regex = True)                                               ## step 4: remove all tailor stopwords
+        regex = True)                                               ## step 4: remove first set of tailor stopwords
     
     df = df_remove_punctuation (df, 'lower_text', 'no_pun_text')    ## step 5: remove the punctuation 
 
@@ -99,9 +102,12 @@ def processFunction (rows, nrows):
     df= df_tokenization(df, 'no_pun_text', 'tok_words')             ## step 6: tokenization
 
     df= df_remove_stopwords(df, 'tok_words','no_stopwords' )        ## step 7: remove English stopwords 
-    
-    df = df_lemmatizer (df, 'no_stopwords', 'lem_words')               ## step 8: lemmatization
-   
+
+    df = df_lemmatizer (df, 'no_stopwords', 'results')              ## step 8: lemmatization
+
+    df['results'] = df['results'].\
+        apply(remove_another_stopwords)                             ## step 9: remove second set of tailor stopwords
+  
     return df
 
 def main():
@@ -152,15 +158,19 @@ def main():
     with concurrent.futures.ProcessPoolExecutor() as executor:
     #with concurrent.futures.ThreadPoolExecutor() as executor:
         results = executor.map(processFunction, rows, nrows)
-
+    
+    df = pd.DataFrame(columns = ['results', 'date'])
     for result in results:
-        print (result) 
-        
+        df = pd.concat([df, result], ignore_index=True)
+
+
+    df.to_csv('result_olympic.csv', encoding = 'utf-8')   
+    print (df) 
+
+
     t2 = time.perf_counter()
     print(f'Finished in {t2-t1} seconds')    
     
-
-
 
 if __name__ == '__main__':
     main()

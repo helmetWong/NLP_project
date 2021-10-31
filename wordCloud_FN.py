@@ -28,20 +28,24 @@ common  = ['gon na', 'gon  na','gon', 'na','got','watching olympic', 'game', 'gu
             'world', 'someone','everyone', 'done', 'next', 'last','getting']
 ateez   = ['ateez', 'ateezofficial', 'ateezofficial ateez', 'olympicslovesateez ateez', 'olympicslovesateez ateezofficial',\
             'answer olympicslovesateez', 'olympicslovesateez dreamer', 'olympicslovesateez', 'win olympicslovesateez',\
-            'olympicslovesateez', 'slovesateez dreamer']
+            'olympicslovesateez', 'slovesateez dreamer', 'slovesateez']
 expression =['congratulation', 'well done','proud','happy', 'incredible','thank', 'amazing','great','right','well', 'congrat'\
              'lol']
-alphabet = ['n', 'c', 'b', 'f', 'im','u','h']
+alphabet = ['n', 'c', 'b', 'f', 'im','u','h',"\'", '\"', 'v']
+numbers   = ['1', '2', '3', '4', '5','6', '7', '8', '9', '2021']
 
 interest = ['new', 'even','country','japan','really', 'team', 'hope', 'thing', 'every', 'lot']
 unknown  = ['amp', 'omg']
 
-ANOTHER_STOPWORDS = olympic + gold + common + ateez + expression + alphabet + interest + unknown
+#ANOTHER_STOPWORDS = []
+ANOTHER_STOPWORDS = olympic + gold + common + ateez + expression + alphabet +\
+                    numbers + interest + unknown
+
 
 def remove_http (text):
     '''
     remove_http (text):
-        This function remove 'https://t.co' + 10 following characters in
+        This function remove 'https' + 10 following characters in
         a string
     parameter:
         text (string)
