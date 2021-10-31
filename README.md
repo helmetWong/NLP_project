@@ -13,10 +13,17 @@ Olympics_Tokyo_tweets.csv(98.54 MB)
 Functions for data preparation:
 
 Step 1: Remove all 'remove all 'https://t.co/' + 10 
+
 Step 2: Remove all emoji
+
 Step 3: lower case on text
+
 Step 4: remove all tailor stopwords (defined above)
+
 Step 5: remove all the punctuation
+
 Step 6: tokenization
-Step 7: lemmatization       
+
+Step 7: lemmatization      
+
 Step 8: join all the words together seperated by " " within a row
