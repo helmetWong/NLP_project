@@ -13,6 +13,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 https = 'https://t.co/'
 wordnet_lemmatizer = WordNetLemmatizer()
+STOPWORDS = set(stopwords.words('english'))
 
 def remove_http (text):
     '''
@@ -126,7 +127,7 @@ def remove_stopwords(text):
     return: 
         output (list) 
     '''
-    output= [i for i in text if i not in stop_words]
+    output= [i for i in text if i not in STOPWORDS]
     return output
 
 def df_remove_stopwords(dataframe, inputName, newColName):

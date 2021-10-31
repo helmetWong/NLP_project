@@ -21,11 +21,10 @@ def processFunction (rows, nrows):
        Step 4: remove all tailor stopwords (defined above)
        Step 5: remove all the punctuation
        Step 6: tokenization
-       Step 7: lemmatization       
-       Step 8: join all the words together seperated by " " within a row
-       (These functions are written in wordCloud_FN.py
-        please read the docstring "printDoc.py" for details).
-       return: is a string of words to be used in wordcloud. 
+       Step 7: remove English stopwords
+       Step 8: lemmatization       
+
+       return: df (dataframe)
     '''
 
     ####    Tailor stopwords    ######################################################
@@ -35,15 +34,13 @@ def processFunction (rows, nrows):
     #
     ##################################################################################
     #tailor_stopwords = []
-    tailor_stopwords = ['olympic', 'sport', 'olympics', 'tokyo olympic',
-                        'olymics olympic','tokyo2020 olympic',
-                        'olympics tokyo2020', 'olympics olympic', 'tokyo', 
-                        'olympicgame',
+    tailor_stopwords = ['im', 'u', 's', 'g', 'w','b','c','oh'
+        'olympic', 'sport', 'olympics', 'tokyo olympic',
+        'olymics olympic','tokyo2020 olympic',
+                        'olympics tokyo2020', 'olympics olympic', 'tokyo', 'olympicgame'
                         'ateezofficial', 'ateez', 'official', 'lovesateez',
-                        'get','got', 'got answer', 'today', 'love', 'like', 
-                        'hope', 'also', 'win love', 'wa', 'one', 'tching', 'tch'
-                        'gon', 'gon na', 'na', 'win', 'answer', 
-                        'watching','watch','game', 'would'] 
+                        'get','got', 'got answer', 'today', 'love', 'like', 'hope', 'also', 'win love', 'wa', 'one', 'tching', 'tch'
+                        'gon', 'gon na', 'na', 'win', 'answer', 'watching', 'watch','game', 'would'] 
 
     replaced_to = ""
 
@@ -98,17 +95,14 @@ def processFunction (rows, nrows):
     
     df = df_remove_punctuation (df, 'lower_text', 'no_pun_text')    ## step 5: remove the punctuation 
 
+
     df= df_tokenization(df, 'no_pun_text', 'tok_words')             ## step 6: tokenization
 
-    df= df_remove_stopwords(df, 'tok_words','no_stopwords' )        ## step 7: remove English stopwords   
+    df= df_remove_stopwords(df, 'tok_words','no_stopwords' )        ## step 7: remove English stopwords 
     
-    df = df_lemmatizer (df, 'no_stopwords', 'lem_words')            ## step 8: lemmatization
-    
-    df['lem_words'] = df['lem_words'].\
-        apply(lambda x: ' '.join([word for word in x]))             ## step 9: join the words
-    
-    text = " ".join(review for review in df.lem_words)              
-    return text
+    df = df_lemmatizer (df, 'no_stopwords', 'lem_words')               ## step 8: lemmatization
+   
+    return df
 
 def main():
     print (processFunction.__doc__)
@@ -159,33 +153,16 @@ def main():
     #with concurrent.futures.ThreadPoolExecutor() as executor:
         results = executor.map(processFunction, rows, nrows)
 
-    #####   creating the Word Cloud    ###############################################
-    #
-    #   join all the text from the list of results together
-    #   apply the stop_words here
-    #   create the wordcloud
-    #
-    ##################################################################################
-
-    for result in results: 
-        wholeText = wholeText + " " + result
-        totalWords += len(wholeText)
-
-    print ("There are {} words in the combination of all review.".format(totalWords))
-    final_wordcloud = WordCloud(width = 968, height = 968, 
-                    background_color ='black', 
-                    stopwords = stop_words, 
-                    min_font_size = 10).generate(wholeText)
-
-    # Displaying the WordCloud                    
-    plt.figure(figsize = (10, 10), facecolor = None) 
-    plt.imshow(final_wordcloud) 
-    plt.axis("off") 
-    plt.tight_layout(pad = 0) 
-  
+    for result in results:
+        print (result) 
+        
     t2 = time.perf_counter()
-    print(f'Finished in {t2-t1} seconds')
-    plt.show()
+    print(f'Finished in {t2-t1} seconds')    
+    
+
+
 
 if __name__ == '__main__':
     main()
+
+
