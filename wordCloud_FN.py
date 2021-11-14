@@ -21,8 +21,8 @@ olympic = ['olympi','2020','tokyo2020','tokyo','olympic','watching olympic', 'to
             'athlete', 'olympicgame', 'tokyoolympic ', 's2021']
 gold    = ['gold medal', 'gold', 'medal olympic', 'olympics gold', 'olympics medal', 'gold olympic', 'medal']
 common  = ['gon na', 'gon  na','gon', 'na','got','watching olympic', 'game', 'guy', 'people', 'time', 'mean', 'get', 'play', 'sport',\
-            'got answer', 'best', 'make', 'watch olympic', 'olympics live', 'story', 'could', 'see', 'made', 'one', 'like', 'think',\
-            'watching', 'going', 'love','say','good', 'would', 'also', 'still', 'watch', 'much', 'win', 'go', 'athlete', 'look',\
+            'got answer',  'make', 'watch olympic', 'olympics live', 'story', 'could', 'see', 'made', 'one', 'think',\
+            'watching', 'going', 'would', 'also', 'still', 'watch', 'much', 'win', 'go', 'athlete', 'look',\
             'today', 'many', 'first', 'dont','didnt', 'cant', 'man', 'woman','oh','know', 'year', 'day', 'even', 'let', 'give', 'everything',\
             'anyone', 'must', 'may', 'watch','alway', 'winning', 'went','event', 'new', 'need', 'want','said','watched','take',\
             'world', 'someone','everyone', 'done', 'next', 'last','getting']
@@ -30,16 +30,20 @@ ateez   = ['ateez', 'ateezofficial', 'ateezofficial ateez', 'olympicslovesateez 
             'answer olympicslovesateez', 'olympicslovesateez dreamer', 'olympicslovesateez', 'win olympicslovesateez',\
             'olympicslovesateez', 'slovesateez dreamer', 'slovesateez']
 expression =['congratulation', 'well done','proud','happy', 'incredible','thank', 'amazing','great','right','well', 'congrat'\
-             'lol']
+             'lol', 'love','say','good', 'like'\
+             'best']
 alphabet = ['n', 'c', 'b', 'f', 'im','u','h',"\'", '\"', 'v']
-numbers   = ['1', '2', '3', '4', '5','6', '7', '8', '9', '2021']
+numbers   = ['1', '2', '3', '4', '5','6', '7', '8', '9','0', '2021']
 
 interest = ['new', 'even','country','japan','really', 'team', 'hope', 'thing', 'every', 'lot']
 unknown  = ['amp', 'omg']
 
 #ANOTHER_STOPWORDS = []
-ANOTHER_STOPWORDS = olympic + gold + common + ateez + expression + alphabet +\
+ANOTHER_STOPWORDS = olympic + gold + common +\
+                    ateez +\
+                    alphabet +\
                     numbers + interest + unknown
+#                    #expression +\
 
 
 def remove_http (text):

@@ -7,15 +7,15 @@ import string
 from collections import Counter
 
 
-with open ("result_jade.csv", 'r', encoding='utf-8') as f:
+with open ("result_china.csv", 'r', encoding='utf-8') as f:
     results = f.read()
 
 split_words = results.split()
 Counter = Counter(split_words)
-most_occur = Counter.most_common(52)
+most_occur = Counter.most_common(30)
 mostCommon = pd.DataFrame(most_occur, 
                           columns=['Word', 'Frequency'])
-#mostCommon = mostCommon.iloc[1:, :]
+mostCommon = mostCommon.iloc[2:, :]
 
 # create subplot of the different data frames
 dim = (8, 12)

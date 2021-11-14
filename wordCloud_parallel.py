@@ -35,10 +35,10 @@ def processFunction (rows, nrows):
     #  remove these words to retrieve better information from wordcloud
     #
     ##################################################################################
-    tailor_stopwords = []
-    tailor_stopwords = ['olympic', 'tokyoolympic', 'olympicgame','answer','tokyo2020',\
-                        'answer slovesateez','slovesateez','slovesateez', 'solvesateez',\
-                        'slovesateez dreamer']
+#    tailor_stopwords = []
+    tailor_stopwords = ['olympic', 'tokyoolympic', 'olympicgame','answer','tokyo2020','like']
+                        #'answer slovesateez','slovesateez','slovesateez', 'solvesateez',\
+                        #'slovesateez dreamer']
 
     replaced_to = ""
 
@@ -54,8 +54,8 @@ def processFunction (rows, nrows):
     ##################################################################################
 
     path = ""
+#    filename = "intermediate_overall.csv"
     filename = "Olympics_Tokyo_tweets.csv"
-
     df = pd.read_csv(os.path.join(path, filename), header = 0, 
                               skiprows =range (1, rows), 
                               nrows = nrows, 
@@ -71,6 +71,8 @@ def processFunction (rows, nrows):
     df['date'] = pd.to_datetime(df['date'], errors = 'coerce').dt.normalize()
     start_date = '2021-07-22' 
     end_date = '2021-08-10'
+    #start_date = '2021-08-01' 
+    #end_date = '2021-08-10'
     mask = (df['date'] > start_date) & (df['date'] <= end_date)
     df = df.loc[mask]
 
@@ -110,6 +112,7 @@ def processFunction (rows, nrows):
 
 def main():
     print (processFunction.__doc__)
+#   filename = "intermediate_overall.csv"
     filename = "Olympics_Tokyo_tweets.csv"
     stop_words = set (stopwords.words("english"))
     t1 = time.perf_counter()
@@ -154,6 +157,7 @@ def main():
     ##################################################################################
 
     with concurrent.futures.ProcessPoolExecutor() as executor:
+    #with concurrent.futures.ProcessPoolExecutor(max_workers = 6) as executor:
     #with concurrent.futures.ThreadPoolExecutor() as executor:
         results = executor.map(processFunction, rows, nrows)
 
@@ -181,7 +185,7 @@ def main():
     plt.axis("off") 
     plt.tight_layout(pad = 0) 
 
-    with open ('results.txt', 'w', encoding='utf-8') as f:
+    with open ('results_overall.txt', 'w', encoding='utf-8') as f:
         f.write(wholeText)
     
     t2 = time.perf_counter()

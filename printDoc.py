@@ -1,4 +1,5 @@
 from wordCloud_FN import *
+from wordCloud_parallel import *
 
 def main():
     print (remove_http.__doc__)
@@ -26,6 +27,9 @@ def main():
     print (df_lemmatizer.__doc__)
     print ("*"*105)
     print (remove_emoji.__doc__)
+    print ("*"*105)
+    print (processFunction.__doc__)
+
 
 
 def saveDocString(filename):
@@ -44,7 +48,7 @@ def saveDocString(filename):
         f.write('\n'+ (lemmatizer.__doc__).strip() +'\n\n'+'*'*105 + '\n')
         f.write('\n'+ (df_lemmatizer.__doc__).strip() +'\n\n'+'*'*105 + '\n')
         f.write('\n'+ (remove_emoji.__doc__).strip() +'\n\n'+'*'*105 + '\n')
-
+        f.write('\n'+ (processFunction.__doc__).strip() +'\n\n'+'*'*105 + '\n')
 
 if __name__ =="__main__":
     main()

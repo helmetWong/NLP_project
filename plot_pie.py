@@ -5,7 +5,7 @@ import pandas as pd
 # Pie chart, where the slices will be ordered and plotted counter-clockwise:
 
 path = ""
-filename = "predict_simone.csv"
+filename = "predict_overall.csv"
 
 df = pd.read_csv(os.path.join(path, filename))
 

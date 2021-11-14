@@ -59,8 +59,8 @@ def processFunction (rows, nrows):
     ##################################################################################
 
     path = ""
+#    filename = "intermediate_jamaica.csv"
     filename = "Olympics_Tokyo_tweets.csv"
-
     df = pd.read_csv(os.path.join(path, filename), header = 0, 
                               skiprows =range (1, rows), 
                               nrows = nrows, 
@@ -75,7 +75,7 @@ def processFunction (rows, nrows):
 
     df['date'] = pd.to_datetime(df['date'], errors = 'coerce').dt.normalize()
     start_date = '2021-07-22' 
-    end_date = '2021-08-09'
+    end_date = '2021-08-10'
     mask = (df['date'] > start_date) & (df['date'] <= end_date)
     df = df.loc[mask]
 
@@ -113,6 +113,7 @@ def processFunction (rows, nrows):
 def main():
     print (processFunction.__doc__)
     filename = "Olympics_Tokyo_tweets.csv"
+#    filename = "intermediate_jamaica.csv"
     stop_words = set (stopwords.words("english"))
     t1 = time.perf_counter()
     print ("start....")
@@ -155,7 +156,8 @@ def main():
     #
     ##################################################################################
 
-    with concurrent.futures.ProcessPoolExecutor() as executor:
+#    with concurrent.futures.ProcessPoolExecutor() as executor:
+    with concurrent.futures.ProcessPoolExecutor(max_workers = 6) as executor:
     #with concurrent.futures.ThreadPoolExecutor() as executor:
         results = executor.map(processFunction, rows, nrows)
     
@@ -163,10 +165,8 @@ def main():
     for result in results:
         df = pd.concat([df, result], ignore_index=True)
 
-
-    df.to_csv('result_olympic.csv', encoding = 'utf-8')   
+    df.to_csv('result_overall.csv', encoding = 'utf-8')   
     print (df) 
-
 
     t2 = time.perf_counter()
     print(f'Finished in {t2-t1} seconds')    
