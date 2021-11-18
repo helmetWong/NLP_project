@@ -1,7 +1,9 @@
 # NLP_project
 
 dataset:
+
 https://www.kaggle.com/amritpal333/tokyo-olympics-2021-tweets
+
 Olympics_Tokyo_tweets.csv(98.54 MB)
 
 ---------------------------
