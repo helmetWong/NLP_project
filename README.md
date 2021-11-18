@@ -1,6 +1,6 @@
 # NLP_project
 
-(Micheal Wong 18.11.2021, a group project of Big Data in CityU in semester A 2021)
+(Micheal Wong 18.11.2021, a group project of Big Data in CityU in semester A 2021/22)
 --------------------------
 
 Dataset:
