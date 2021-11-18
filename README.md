@@ -67,3 +67,6 @@ Step 9: remove second set of tailor stopwords
 Step 10: join all the words together seperated by " " within a row
 
 Step 11: join all words in a single text
+
+![Overall_after pre-processing](https://user-images.githubusercontent.com/63725876/142440549-c677a383-9e0f-4965-ba56-29f994c96251.png)
+
