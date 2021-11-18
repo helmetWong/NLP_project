@@ -36,7 +36,7 @@ cntvect = pickle.load(open('vectorizer.pickle', 'rb'))
 model = pickle.load(open('classification.model', 'rb'))
 
 path = ""
-test = "overall"
+test = "tom"
 filename = "predict2_" + test + ".csv"
 
 (testtxt, _)       = read_csv_data("result_" + test + ".csv")

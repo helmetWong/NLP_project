@@ -34,7 +34,7 @@ print(len(traintxt))
 
 # Bag-of-Words representation
 
-cntvect = feature_extraction.text.CountVectorizer(stop_words='english', max_features=108000)
+cntvect = feature_extraction.text.CountVectorizer(stop_words='english', max_features=148000)
 
 # create the vocabulary
 count_vect = cntvect.fit(traintxt)
