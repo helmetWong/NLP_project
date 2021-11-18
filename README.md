@@ -1,5 +1,10 @@
 # NLP_project
 
+dataset:
+https://www.kaggle.com/amritpal333/tokyo-olympics-2021-tweets
+Olympics_Tokyo_tweets.csv(98.54 MB)
+
+Data preprocessing stage: 
 worldCloudFn.py includes certain functions to do data preparation in text mining.
 
 printDoc.py     uses to print the docString of worldCloud.py and save in help.txt
@@ -7,11 +12,22 @@ printDoc.py     uses to print the docString of worldCloud.py and save in help.tx
 wordCloud_parallel.py will use worldCloudFn.py to do data preperation (currently 8 steps, see below).
                       This will create a word cloud for data sciences to select words for further analysis.
                       The program uses parallel programming technique.
+                      output a "result_{name}.csv file
+                      
+dataPrepare_filter.py use to filter the interesting words from the dataset and re-input into word_Cloudparallel.py or worldCloud_parallel.py 
 
 
-dataset:
-https://www.kaggle.com/amritpal333/tokyo-olympics-2021-tweets
-Olympics_Tokyo_tweets.csv(98.54 MB)
+Model training and prediction stage:
+tweets_sentiment_analysis_train.py  uses to train a model by using train.csv or sanders_tweets_train.txt
+                                    the model and vectors saved in classification.model and vectorizer.pickle respectively. 
+                                    apply 10 folds cross validation and max faetures = 148,000
+
+tweets_sentiment_predict_and_plot_pie.py    input "result_{name}.csv file
+                                            output a predict2_{name}.csv file and a pie chart. 
+                                    
+Visualization programs
+plot_test1.py   plot the number of rows in respect of frequency of date in bar chart
+plot_freq.py    plot the frequency of words in a dataset (input = result_{name}.csv) in horizontal bar chart
 
 Functions for data preparation:
 
