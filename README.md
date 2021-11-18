@@ -1,6 +1,6 @@
 # NLP_project
 
-dataset:
+Dataset:
 
 https://www.kaggle.com/amritpal333/tokyo-olympics-2021-tweets
 
