@@ -1,5 +1,8 @@
 # NLP_project
 
+(Micheal Wong 18.11.2021, a group project of Big Data in CityU in semester A 2021)
+--------------------------
+
 Dataset:
 
 https://www.kaggle.com/amritpal333/tokyo-olympics-2021-tweets
