@@ -68,5 +68,13 @@ Step 10: join all the words together seperated by " " within a row
 
 Step 11: join all words in a single text
 
+Original words cloud
+
+![before_del_all_olympics](https://user-images.githubusercontent.com/63725876/142440872-1e32dac3-a15b-4f64-b30c-226116994b1d.png)
+
+-------------------------
+
+After removal of tailered-made stop words
+
 ![Overall_after pre-processing](https://user-images.githubusercontent.com/63725876/142440549-c677a383-9e0f-4965-ba56-29f994c96251.png)
 
